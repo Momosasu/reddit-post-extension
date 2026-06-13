@@ -36,7 +36,7 @@ To run this extension locally in your Google Chrome browser:
 
 1.  Clone this repository or download the source code:
     ```bash
-    git clone https://github.com/YOUR_USERNAME/reddit-thread-grabber.git
+    git clone https://github.com/Momosasu/reddit-post-extension.git
     cd reddit-thread-grabber
     ```
 2.  Open Chrome and navigate to:
