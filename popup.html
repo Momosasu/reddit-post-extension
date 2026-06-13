@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reddit Thread Grabber</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo-section">
+        <div class="logo-icon">R</div>
+        <h1>Reddit Thread Grabber</h1>
+      </div>
+      <span class="version">v1.0</span>
+    </header>
+
+    <!-- Main Display Card -->
+    <main class="card">
+      <!-- Loading State -->
+      <div id="state-loading" class="state active">
+        <div class="spinner"></div>
+        <p class="status-title" id="loading-title">Detecting Tab...</p>
+        <p class="status-subtitle" id="loading-subtitle">Checking for active Reddit thread</p>
+      </div>
+
+      <!-- Success State -->
+      <div id="state-success" class="state">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <p class="status-title">Copied to Clipboard!</p>
+        <p class="status-subtitle" id="success-subtitle">Post and comments copied successfully</p>
+        <button id="btn-copy-again" class="btn btn-primary btn-full-width">
+          Copy Again
+        </button>
+      </div>
+
+      <!-- Error State -->
+      <div id="state-error" class="state">
+        <div class="error-icon">!</div>
+        <p class="status-title" id="error-title">Not on Reddit</p>
+        <p class="status-subtitle" id="error-subtitle">Please open a Reddit post thread to copy comments.</p>
+        <button id="btn-retry" class="btn btn-secondary btn-full-width">
+          Check Again
+        </button>
+      </div>
+    </main>
+
+    <!-- Collapsible Settings Panel -->
+    <details id="settings-details">
+      <summary>Extraction Settings</summary>
+      <div class="settings-panel">
+        
+        <!-- Max Depth Selector -->
+        <div class="option-group">
+          <label class="option-label" for="select-depth">Max Comment Depth</label>
+          <select id="select-depth">
+            <option value="-1">Unlimited replies</option>
+            <option value="0">Top-level comments only</option>
+            <option value="1">Up to 1 reply level (Depth 1)</option>
+            <option value="2">Up to 2 reply levels (Depth 2)</option>
+            <option value="3" selected>Up to 3 reply levels (Depth 3)</option>
+            <option value="4">Up to 4 reply levels (Depth 4)</option>
+            <option value="5">Up to 5 reply levels (Depth 5)</option>
+          </select>
+        </div>
+
+        <!-- Format Selector -->
+        <div class="option-group">
+          <label class="option-label">Markdown Format Style</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="format-style" value="blockquote" checked>
+              Nested Blockquotes (&gt;)
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="format-style" value="list">
+              Indent List (Tabs)
+            </label>
+          </div>
+        </div>
+
+        <!-- Toggle Checkboxes -->
+        <div class="option-group">
+          <label class="option-label">Include Metadata</label>
+          <div class="checkbox-list">
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-author" checked>
+              Authors (u/username)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-score" checked>
+              Comment Scores
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-timestamp">
+              Timestamps
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-source" checked>
+              Source Thread Link
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- Footer info -->
+    <div class="thread-info" id="footer-info">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+      </svg>
+      <span id="footer-text">Ready to extract</span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
